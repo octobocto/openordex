@@ -1,0 +1,33 @@
+name: Update collections
+
+on:
+  pull_request:
+
+jobs:
+  update-collection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Cache node modules and next folder
+      - name: 📬 Caching
+        uses: actions/cache@v3
+        working-directory: scripts
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/*
+
+      - name: 🧰 Install dependencies
+        working-directory: scripts
+        run: npm install
+
+      - name: 🧹 Run update collections
+        working-directory: scripts
+        run: node updateCollections.js
