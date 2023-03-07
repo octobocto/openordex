@@ -27,6 +27,8 @@ jobs:
         run: node updateCollections.js
 
       - name: 🆕 Add changes to collections
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if ! [ -z "$(git status --porcelain)" ]; then
             git config user.name "GitHub Actions Bot"
