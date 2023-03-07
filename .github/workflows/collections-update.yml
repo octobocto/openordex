@@ -34,7 +34,8 @@ jobs:
             #gib access
             git config user.name "GitHub Actions Bot"
             git config user.email "<>"
+            git checkout -b $(date +'%Y-%m-%d')-update-collections
             git add static/collections.json
             git commit -m "static: update collections.json"
-            gh pr create --title "Update collections $(date +'%m-%d')" --base main --head $(date +'%Y-%m-%d')-update-collections --body 'Created by Github Actions'
+            gh pr create --title "Update collections $(date +'%m-%d')" --base main --body 'Created by Github Actions'
           fi
