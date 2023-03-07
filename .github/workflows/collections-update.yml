@@ -1,6 +1,9 @@
 name: Create PR to update collections
 
 on:
+  schedule:
+    # run once a day, 6am
+    - cron:  '0 6 * * *'
   pull_request:
   push:
     branches:
